@@ -10,7 +10,6 @@
         }
         */
         $creds = json_decode(file_get_contents(".dbcredentials.json"), true);
-        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $dbconn = new mysqli($creds['host'], $creds['user'], $creds['password'], "datalabeling")
             or die('Could not connect: ' . $dbconn->connect_error);
         return $dbconn;
