@@ -215,7 +215,7 @@
                             $rol = "role_" . $comp_id;
                             echo "<div class=\"form-row\">";
                             echo "<div class=\"col-md-4\">";
-                            echo "<label class=\"\" for=\"$rol\">$comp_name</label>";
+                            echo "<label class=\"" for=\"$rol\">$comp_name</label>";
                             echo "</div>";
                             echo "<div class=\"col-md-6\">";
                             echo "<select class=\"custom-select\" id=\"$rol\">";
@@ -224,7 +224,7 @@
                                 echo "<option value=\"$k\">$v</option>";
                             }
                             echo "</select>";
-                            echo "</div>\n";
+                            echo "</div></div><!-- form-row -->\n";
 
                         }   
                     ?>
