@@ -179,6 +179,12 @@
             <div class="row"><!-- horizonal rule -->
                 <div class="col-md-12" style="height:3px; border: 1px gray solid; margin: 5px 0px"></div>
             </div><!-- .row -->
+            <div class="col-md-12"> 
+                <h1>Labeling Licencing Announcements</h1>
+                <p class="instructions">
+                Review the text below to determine the type of licensing and the role of each of the parties involved.
+                </p>
+            </div>
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-10 offset-md-1 text-view" >
                     <?= $content ?>
@@ -188,12 +194,15 @@
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-12" >
                     <h4>Type of License</h4>
+                    <p class="instructions">
+                    Select the type of licences in this announcement.
+                    </p>
                     <div class="form-check form-check-inline">
                     <?php
                     foreach ($license_type as $k => $v) {
                         $nam = "type_" . $k;
                        
-                        echo "<input class=\"form-check-input\" type=\"radio\" name=\"lic_type\" id=\"$nam\" value=\"$k\">";
+                        echo "<input class=\"form-check-input mr-sm-2\" type=\"radio\" name=\"lic_type\" id=\"$nam\" value=\"$k\">";
                         echo "<label class=\"form-check-label\" for=\"$nam\">$v</label>";
                     }
                     ?>
