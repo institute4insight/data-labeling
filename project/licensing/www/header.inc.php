@@ -10,22 +10,22 @@
         }
         */
         $creds = json_decode(file_get_contents(".dbcredentials.json"), true);
-        $dbconn = pg_connect("host=" . $creds['host'] . " dbname=datalabeling"
-                          . " user=" . $creds['user'] . " password=" . $creds['password'])
-            or die('Could not connect: ' . pg_last_error());
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        $dbconn = new mysqli($creds['host'], $creds['user'], $creds['password'], "datalabeling");
+            or die('Could not connect: ' . $dbconn->connect_error);
         return $dbconn;
     }
 
     function db_query($query, $dbconn) {
-        return pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
+        return dbconn->query($query) or die('Query failed: ' . $dbconn->error);
     }
 
     function db_free_result($result) {
-        pg_free_result($result);
+        $result->free();
     }
 
     function db_close($dbconn) {
-        pg_close($dbconn);
+        $dbconn->close();
     }
 
     $license_role = [
