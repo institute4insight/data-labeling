@@ -84,3 +84,11 @@ h1 {margin-bottom: 1em;}
     color: steelblue;
     font-style: italic;
 }
+
+h4 {
+    margin-top: 4em;
+}
+
+body {
+    padding-bottom: 10em;
+}
