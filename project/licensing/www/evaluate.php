@@ -184,15 +184,10 @@
                     <?= $content ?>
                 </div>
             </div><!-- .row -->
-            <div class="row" style="margin-top: 10px">
-                <div class="col-md-10 offset-md-1 text-view" >
-                    <?= $content ?>
-                </div>
-            </div><!-- .row -->
             <!-- form -->
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-12" >
-                    <h3>Type of License</h3>
+                    <h4>Type of License</h4>
                     <?php
                     foreach ($license_type as $k => $v) {
                         $nam = "type_" . $k;
@@ -202,7 +197,20 @@
                     }
                     ?>
 
-
+                    <h4>Role of the  Involved Parties</h4>
+                    <p class='instructions'>Please select the role of each of the companies that are listed below.</p>
+                    <?php
+                        foreach ($companies as $comp_id => $comp_name) {
+                            $rol = "role_" . $comp_id;
+                            echo "<label class=\"mr-sm-2\" for=\"$rol\">$comp_name</label>";
+                            echo "<select class=\"custom-select mr-sm-2\" id=\"$rol\">";
+                            echo "    <option selected>Choose...</option>";
+                            foreach ($license_role as $k => $v) {
+                                echo "<option value=\"$comp_name\">$comp_name</option>";
+                            }
+                            echo "</select>\n";
+                        }   
+                    ?>
                     
                 </div>
             </div><!-- .row -->
