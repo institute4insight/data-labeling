@@ -77,4 +77,7 @@ h1 {margin-bottom: 1em;}
 .text-view {
     max-height: 30em;
     overflow-y: scroll;
+    border: solid rgba(50, 50, 50, 0.75) 2px;
 }
+
+

@@ -184,7 +184,28 @@
                     <?= $content ?>
                 </div>
             </div><!-- .row -->
+            <div class="row" style="margin-top: 10px">
+                <div class="col-md-10 offset-md-1 text-view" >
+                    <?= $content ?>
+                </div>
+            </div><!-- .row -->
+            <!-- form -->
+            <div class="row" style="margin-top: 10px">
+                <div class="col-md-12" >
+                    <h3>Type of License</h3>
+                    <?php
+                    foreach ($license_type as $k => $v) {
+                        $nam = "type_" . $k;
+                        echo "<div class=\"form-check form-check-inline\">";
+                        echo "<input class=\"form-check-input\" type=\"radio\" name=\"lic_type\" id=\"$nam\" value=\"$k\">";
+                        echo "<label class=\"form-check-label\" for=\"$nam\">$v</label>";
+                    }
+                    ?>
 
+
+                    
+                </div>
+            </div><!-- .row -->
 
         </div>
 
