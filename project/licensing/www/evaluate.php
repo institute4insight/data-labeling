@@ -197,16 +197,18 @@
                     <p class="instructions">
                     Select the type of licences in this announcement.
                     </p>
-                    <div class="form-check form-check-inline">
+                    <!-- <div class="form-check form-check-inline"> -->
+                    <div class="form-row">
                     <?php
                     foreach ($license_type as $k => $v) {
                         $nam = "type_" . $k;
-                       
+                        echo "<div class=\"col-md-2\">";
                         echo "<input class=\"form-check-input\" type=\"radio\" name=\"lic_type\" id=\"$nam\" value=\"$k\">";
                         echo "<label class=\"form-check-label\" for=\"$nam\">$v</label>";
+                        echo "</div>";
                     }
                     ?>
-                    </div>
+                    </div><!-- form-row -->
 
                     <h4>Role of the  Involved Parties</h4>
                     <p class='instructions'>Please select the role of each of the companies that are listed below.</p>
