@@ -193,6 +193,7 @@
             </div><!-- .row -->
             <!-- form -->
             <div class="row" style="margin-top: 10px">
+                <form method="POST"> 
                 <div class="col-md-12" >
                     <!-- <h4>Type of License</h4> -->
                     <p class="instructions">
@@ -236,6 +237,7 @@
                     </p>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
+                </form>
             </div><!-- .row -->
 
         </div>
