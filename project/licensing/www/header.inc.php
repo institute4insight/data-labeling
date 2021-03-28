@@ -45,6 +45,6 @@
     ];
     
     $n_roles = count($license_role);
-    $n_types = count($license_types);
+    $n_types = count($license_type);
 ?>
 <!-- Nothing to see -->
