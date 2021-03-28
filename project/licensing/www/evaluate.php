@@ -222,10 +222,10 @@
                             echo "<label class=\"\" for=\"$rol\">$comp_name</label>";
                             echo "</div>";
                             echo "<div class=\"col-md-6\">";
-                            echo "<select class=\"custom-select\" id=\"$rol\">";
+                            echo "<select class=\"custom-select\" id=\"$rol\" name=\"lic_role\">";
                             echo "    <option selected>Choose...</option>";
                             foreach ($license_role as $k => $v) {
-                                echo "<option value=\"$k\">$v</option>";
+                                echo "<option value=\"$comp_name^$k\">$v</option>";
                             }
                             echo "</select>";
                             echo "</div></div><!-- form-row -->\n";
