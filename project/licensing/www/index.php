@@ -86,21 +86,21 @@
         if (isset($_REQUEST['u'])) {
             # validate user id
             $uid = preg_split("/@/", pg_escape_string($_REQUEST['u']))[0];
-            $conn = db_connect();
-            $q = "
-            SELECT COUNT(*) AS n
-            FROM licensing_assignments
-            WHERE userid='$uid'
-            ";
-            $res = pg_query($conn, $q);
-            if (!$res) {
-                echo "An error occurred.\n";
-                exit;
-            }
+            // $conn = db_connect();
+            // $q = "
+            // SELECT COUNT(*) AS n
+            // FROM licensing_assignments
+            // WHERE userid='$uid'
+            // ";
+            // $res = pg_query($conn, $q);
+            // if (!$res) {
+            //     echo "An error occurred.\n";
+            //     exit;
+            // }
 
-            $n_required = pg_fetch_assoc($res)['n'];
-            db_free_result($res);
-            db_close($conn);
+            // $n_required = pg_fetch_assoc($res)['n'];
+            // db_free_result($res);
+            // db_close($conn);
 
             //echo "The number of answers required for user $uid is $n_required.\n";
             //echo "The number of completed answers is $n_completed.\n";
