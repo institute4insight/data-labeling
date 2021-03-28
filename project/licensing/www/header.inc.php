@@ -28,10 +28,11 @@
     }
 
     $license_role = [
-        "licensor" => "Licensor (party grants license)",
-        "licensee" => "Licensee (party receives license)",
-        "both" => "Both (party grants and receives licenses)",
-        "n/a" => "Neither (party is not involved in license agreement)"
+        "licensor" => "Licensor (this company grants license)",
+        "licensee" => "Licensee (this company receives license)",
+        "both" => "Both (this company grants and receives licenses)",
+        "neither" => "Neither (this company is not involved in license agreement)",
+        "not_company" => "N/A (this is not a company)"
     ];
 
     $license_type = [

@@ -182,7 +182,7 @@
             <div class="col-md-12"> 
                 <h1>Labeling Licencing Announcements</h1>
                 <p class="instructions">
-                Review the text in the box below to determine the type of licensing and the role of each of the parties involved.
+                Review the text in the box below to determine the type of licensing and the role of each of the companies involved.
                 You may scroll within the text box to read the entire document.
                 </p>
             </div>
