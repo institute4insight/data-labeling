@@ -202,7 +202,7 @@
                     foreach ($license_type as $k => $v) {
                         $nam = "type_" . $k;
                        
-                        echo "<input class=\"form-check-input mr-sm-2\" type=\"radio\" name=\"lic_type\" id=\"$nam\" value=\"$k\">";
+                        echo "<input class=\"form-check-input\" type=\"radio\" name=\"lic_type\" id=\"$nam\" value=\"$k\">";
                         echo "<label class=\"form-check-label\" for=\"$nam\">$v</label>";
                     }
                     ?>
@@ -213,13 +213,19 @@
                     <?php
                         foreach ($companies as $comp_id => $comp_name) {
                             $rol = "role_" . $comp_id;
+                            echo "<div class=\"form-row\">";
+                            echo "<div class=\"col-md-4 mb-3\">";
                             echo "<label class=\"mr-sm-2\" for=\"$rol\">$comp_name</label>";
+                            echo "</div>";
+                            echo "<div class=\"col-md-6 mb-3\">";
                             echo "<select class=\"custom-select mr-sm-2\" id=\"$rol\">";
                             echo "    <option selected>Choose...</option>";
                             foreach ($license_role as $k => $v) {
                                 echo "<option value=\"$k\">$v</option>";
                             }
-                            echo "</select>\n";
+                            echo "</select>";
+                            echo "</div>\n";
+
                         }   
                     ?>
                     
