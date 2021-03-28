@@ -75,8 +75,7 @@
     $error_message = '';
 
     if (!isset($_SESSION['survey_licensing'])) {
-        $_SESSION['survey_licensing
-'] = [];
+        $_SESSION['survey_licensing'] = [];
     }
 
 
@@ -104,6 +103,10 @@
 
             //echo "The number of answers required for user $uid is $n_required.\n";
             //echo "The number of completed answers is $n_completed.\n";
+
+            $n_required = 100;
+            $n_completed = 37;
+            
             if ($n_required>0) {
                 $_SESSION['survey_licensing']['user_id'] = $uid;
                
