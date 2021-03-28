@@ -214,11 +214,11 @@
                         foreach ($companies as $comp_id => $comp_name) {
                             $rol = "role_" . $comp_id;
                             echo "<div class=\"form-row\">";
-                            echo "<div class=\"col-md-4 mb-3\">";
-                            echo "<label class=\"mr-sm-2\" for=\"$rol\">$comp_name</label>";
+                            echo "<div class=\"col-md-4\">";
+                            echo "<label class=\"\" for=\"$rol\">$comp_name</label>";
                             echo "</div>";
-                            echo "<div class=\"col-md-6 mb-3\">";
-                            echo "<select class=\"custom-select mr-sm-2\" id=\"$rol\">";
+                            echo "<div class=\"col-md-6\">";
+                            echo "<select class=\"custom-select\" id=\"$rol\">";
                             echo "    <option selected>Choose...</option>";
                             foreach ($license_role as $k => $v) {
                                 echo "<option value=\"$k\">$v</option>";
