@@ -182,7 +182,8 @@
             <div class="col-md-12"> 
                 <h1>Labeling Licencing Announcements</h1>
                 <p class="instructions">
-                Review the text below to determine the type of licensing and the role of each of the parties involved.
+                Review the text in the box below to determine the type of licensing and the role of each of the parties involved.
+                You may scroll within the text box to read the entire document.
                 </p>
             </div>
             <div class="row" style="margin-top: 10px">
@@ -193,7 +194,7 @@
             <!-- form -->
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-12" >
-                    <h4>Type of License</h4>
+                    <!-- <h4>Type of License</h4> -->
                     <p class="instructions">
                     Select the type of licences in this announcement.
                     </p>
@@ -210,7 +211,7 @@
                     ?>
                     </div><!-- form-row -->
 
-                    <h4>Role of the  Involved Parties</h4>
+                    <!-- <h4>Role of the  Involved Parties</h4> -->
                     <p class='instructions'>Select the role of each of the companies that are listed below.</p>
                     <?php
                         foreach ($companies as $comp_id => $comp_name) {
