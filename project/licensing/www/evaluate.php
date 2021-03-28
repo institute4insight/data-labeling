@@ -180,7 +180,7 @@
                 <div class="col-md-12" style="height:3px; border: 1px gray solid; margin: 5px 0px"></div>
             </div><!-- .row -->
             <div class="row" style="margin-top: 10px">
-                <div class="col-md-10 offset-md-1">
+                <div class="col-md-10 offset-md-1 text-view" >
                     <?= $content ?>
                 </div>
             </div><!-- .row -->

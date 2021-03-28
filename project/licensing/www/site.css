@@ -73,3 +73,8 @@ h1 {margin-bottom: 1em;}
 .row-margin {
     margin-top: 10px;
 }
+
+.text-view {
+    max-height: 30em;
+    overflow-y: scroll;
+}
