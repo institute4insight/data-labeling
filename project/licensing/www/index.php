@@ -36,7 +36,7 @@
                     <div class="row">
                         <!-- <div class="col"></div> -->
                         <div class="col align-self-center">
-                        <h1>Image Labeling Task</h1>
+                        <h1>Labeling Task: License Agreements</h1>
                         <?php
                             if (strlen($msg)>0) {
                                 echo "<h4 style=\"color: red;\">$msg</h4>\n";
@@ -74,12 +74,13 @@
 
     $error_message = '';
 
-    if (!isset($_SESSION['survey_similarity'])) {
-        $_SESSION['survey_similarity'] = [];
+    if (!isset($_SESSION['survey_licensing'])) {
+        $_SESSION['survey_licensing
+'] = [];
     }
 
 
-    if (isset($_SESSION['survey_similarity']['user_id'])) {
+    if (isset($_SESSION['survey_licensing']['user_id'])) {
         header('Location: compare.php');
     } else {
         if (isset($_REQUEST['u'])) {
@@ -87,12 +88,9 @@
             $uid = preg_split("/@/", pg_escape_string($_REQUEST['u']))[0];
             $conn = db_connect();
             $q = "
-            SELECT COUNT(*) AS n FROM
-            ( SELECT * FROM  assignments
-              UNION
-              SELECT * FROM  assignments_similar2
-            ) a
-             WHERE userid='$uid'
+            SELECT COUNT(*) AS n
+            FROM licensing_assignments
+            WHERE userid='$uid'
             ";
             $res = pg_query($conn, $q);
             if (!$res) {
@@ -107,9 +105,9 @@
             //echo "The number of answers required for user $uid is $n_required.\n";
             //echo "The number of completed answers is $n_completed.\n";
             if ($n_required>0) {
-                $_SESSION['survey_similarity']['user_id'] = $uid;
+                $_SESSION['survey_licensing']['user_id'] = $uid;
                
-                header("Location: compare.php");
+                header("Location: evaluate.php");
             } else {
                 $error_message = "The User ID is not valid. Please, try again";
                 login_form($error_message, "");
