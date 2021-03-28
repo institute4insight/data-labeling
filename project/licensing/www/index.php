@@ -80,7 +80,7 @@
 
 
     if (isset($_SESSION['survey_licensing']['user_id'])) {
-        header('Location: compare.php');
+        header('Location: evaluate.php');
     } else {
         if (isset($_REQUEST['u'])) {
             # validate user id
@@ -106,7 +106,7 @@
 
             $n_required = 100;
             $n_completed = 37;
-            
+
             if ($n_required>0) {
                 $_SESSION['survey_licensing']['user_id'] = $uid;
                
