@@ -186,9 +186,22 @@
                 You may scroll within the text box to read the entire document.
                 </p>
             </div>
+            <div class="row" style="margin-top: 2px">
+                <div class="col-md-2">
+                    Text that helps to identify the role of each company
+                </div>
+                <!-- <div class="col-md-10 offset-md-1 text-view" > -->
+                <div class="col-md-10 text-view" >
+                    <?= $license_sents ?>
+                </div>
+            </div><!-- .row -->
             <div class="row" style="margin-top: 10px">
-                <div class="col-md-10 offset-md-1 text-view" >
-                    <?= $content ?>
+                <div class="col-md-2">
+                    Text that helps to identify the role of each company
+                </div>
+                <!-- <div class="col-md-10 offset-md-1 text-view" > -->
+                <div class="col-md-10 text-view" >
+                    <?= $key_sents ?>
                 </div>
             </div><!-- .row -->
             <!-- form -->
@@ -225,7 +238,7 @@
                             echo "<select class=\"custom-select\" id=\"$rol\" name=\"lic_role\">";
                             echo "    <option selected>Choose...</option>";
                             foreach ($license_role as $k => $v) {
-                                echo "<option value=\"$comp_name^$k\">$v</option>";
+                                echo "<option value=\"$comp_id^$k\">$v</option>";
                             }
                             echo "</select>";
                             echo "</div></div><!-- form-row -->\n";
@@ -268,3 +281,5 @@
 <?php
     //}
 ?>
+<!-- values from radio buttons https://stackoverflow.com/questions/596351/how-can-i-know-which-radio-button-is-selected-via-jquery -->
+
