@@ -187,8 +187,8 @@
                 </p>
             </div>
             <div class="row" style="margin-top: 2px">
-                <div class="col-md-2">
-                    Text that helps to identify the role of each company
+                <div class="col-md-2 instructions">
+                    Text that includes “license/licensing”
                 </div>
                 <!-- <div class="col-md-10 offset-md-1 text-view" > -->
                 <div class="col-md-10 text-view" >
@@ -196,7 +196,7 @@
                 </div>
             </div><!-- .row -->
             <div class="row" style="margin-top: 10px">
-                <div class="col-md-2">
+                <div class="col-md-2 instructions">
                     Text that helps to identify the role of each company
                 </div>
                 <!-- <div class="col-md-10 offset-md-1 text-view" > -->
