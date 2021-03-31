@@ -2,8 +2,11 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
+    session_start();
+    unset($_SESSION['survey_licensing']);
+    session_destroy();
+    // require 'header.inc.php';
 
-    require 'header.inc.php';
 ?>
 <!DOCTYPE HTML>
 <HTML lang="eng">

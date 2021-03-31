@@ -85,28 +85,23 @@
         if (isset($_REQUEST['u'])) {
             # validate user id
             $uid = preg_split("/@/", pg_escape_string($_REQUEST['u']))[0];
-            // $conn = db_connect();
-            // $q = "
-            // SELECT COUNT(*) AS n
-            // FROM licensing_assignments
-            // WHERE userid='$uid'
-            // ";
-            // $res = pg_query($conn, $q);
-            // if (!$res) {
-            //     echo "An error occurred.\n";
-            //     exit;
-            // }
 
-            // $n_required = pg_fetch_assoc($res)['n'];
-            // db_free_result($res);
-            // db_close($conn);
+            $conn = db_connect();
+            $q = "
+            SELECT COUNT(*) AS n
+            FROM licensing_assignments
+            WHERE userid='$uid'
+            ";
 
-            //echo "The number of answers required for user $uid is $n_required.\n";
-            //echo "The number of completed answers is $n_completed.\n";
-
-            $n_required = 100;
-            $n_completed = 37;
-
+            if( $res = $conn->query($q) ) {
+                $row = $res->fetch_assoc();
+                $n_required = $row['n'];
+                $res->close();
+            } else {
+                $n_required = 0;
+            }
+            $conn->close();
+            
             if ($n_required>0) {
                 $_SESSION['survey_licensing']['user_id'] = $uid;
                
