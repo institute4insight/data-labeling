@@ -145,7 +145,7 @@
         $conn = db_connect();
         
         $q = "
-        SELECT doc_id, license_sents, key_sents
+        SELECT doc_id, content, license_sents, key_sents
         FROM licensing_documents
         WHERE doc_id='$doc_id'
         ";
@@ -180,12 +180,13 @@
         $assignment_id = "$doc_id^$uid";
         list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id);
     } else {
-
+        list($assignment_id, $doc_id, $n_completed, $n_total) = get_next_assignment($uid);
+        list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id);
     }
 
 
-    //list($content, $license_sents, $key_sents, $companies) = get_sample_doc($doc_id);
-    list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id)
+    // //list($content, $license_sents, $key_sents, $companies) = get_sample_doc($doc_id);
+    // list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id)
 ?>
 
 <HTML lang="eng">
