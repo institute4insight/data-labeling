@@ -36,33 +36,79 @@
     $save_message = "";
 
 
-    function process_response() {
-        if(!isset($_REQUEST)) {
-            return -1;
-        }
-        else {
-            // process results here ...
-                // //check if this is a response, and add to database
-                // if (isset($_REQUEST, $_REQUEST['a'], $_REQUEST['r'])) {
-                //     $conn = db_connect();
-                //     $response_a = pg_escape_string(urldecode($_REQUEST['a']));
-                //     $response_r = pg_escape_string(urldecode($_REQUEST['r']));
-                //     $q = "
-                //         INSERT INTO licensing_responses (assignment_id, label, ts)
-                //         VALUES ('$response_a', '$response_r', NOW())
-                //         ON CONFLICT (assignment_id) DO NOTHING
-                //     ";
-                //     $save_message = "<pre>$q</pre>";
-                //     $res = pg_query($conn, $q);
-                //     if (!$res) {
-                //         echo "An error occurred.\n";
-                //         exit;
-                //     }
-                //     db_free_result($res);
-                //     db_close($conn);
+    // assignment_id: bwr0000020010710dx4q025ce^nmarin1
+    // user_id: nmarin1
+    // n_total: 1438
+    // n_completed: 0
+    // lic_role: Choose...
+    // lic_role: Choose...
+    // lic_role: Choose...
+    // lic_role: Choose...
+    // lic_role: Choose...
+    // submit: skip
 
-                // }
-            return 0;
+    //      Field           Type            Null    Key	Default	Extra
+    // 0	submit_time     varchar(64)     YES     None	
+    // 1	user_id         varchar(64)     YES     None	
+    // 2	assignment_id   varchar(129)    YES     None	
+    // 3	license_type    varchar(256)    YES     None	
+    // 4	license_roles   text            YES     None	
+    // 5	valid_response  tinyint(1)      YES     None	
+    
+
+    function process_response() {
+        if (isset($_REQUEST, $_REQUEST['user_id'], $_REQUEST['assignment_id'], $_REQUEST['submit'])) {
+            $conn = db_connect();
+            $response_assignment_id = pg_escape_string(urldecode($_REQUEST['assignment_id']));
+            $response_user_id = pg_escape_string(urldecode($_REQUEST['user_id']));
+            switch ($_REQUEST['submit']) {
+                case 'skip':
+                    q = "
+                        INSERT INTO
+                            licensing_responses (submit_time, user_id, assignment_id, license_type, license_roles, valid_response)
+                        VALUES (
+                            NOW(),
+                            '$response_user_id',
+                            '$response_assignment_id',
+                            NULL,
+                            NULL,
+                            0
+                        )
+                        ON CONFLICT (assignment_id) DO NOTHING
+                    ";
+                    break;
+                default:
+                    $response_license_type = pg_escape_string(urldecode($_REQUEST['license_type']));
+                    $response_license_role = '';
+                    $sep = '';
+                    foreach($_REQUEST['license_role'] as $v) {
+                        $response_license_role .= $sep . $v;
+                        $sep = ','
+                    }
+                    q = "
+                    INSERT INTO
+                        licensing_responses (submit_time, user_id, assignment_id, license_type, license_roles, valid_response)
+                    VALUES (
+                        NOW(),
+                        '$response_user_id',
+                        '$response_assignment_id',
+                        '$response_license_type',
+                        '$response_license_role',
+                        1
+                    )
+                    ON CONFLICT (assignment_id) DO NOTHING
+                ";
+            }
+            $save_message = "<pre>$q</pre>";
+            $res = conn->query($q)
+            if (!$res) {
+                echo "An error occurred.\n";
+                exit;
+            }
+            $res->close();
+            $conn->close();
+        } else {
+            $save_message = "<div>Nothing to do...</div>";
         }
     }
 
