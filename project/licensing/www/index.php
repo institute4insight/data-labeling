@@ -85,23 +85,22 @@
         if (isset($_REQUEST['u'])) {
             # validate user id
             $uid = preg_split("/@/", pg_escape_string($_REQUEST['u']))[0];
+            $n_required = 0;
 
             $conn = db_connect();
             $q = "
             SELECT COUNT(*) AS n
             FROM licensing_assignments
-            WHERE userid='$uid'
+            WHERE user_id='$uid'
             ";
-
+            
             if( $res = $conn->query($q) ) {
                 $row = $res->fetch_assoc();
                 $n_required = $row['n'];
                 $res->close();
-            } else {
-                $n_required = 0;
             }
             $conn->close();
-            
+
             if ($n_required>0) {
                 $_SESSION['survey_licensing']['user_id'] = $uid;
                
