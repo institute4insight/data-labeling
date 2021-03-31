@@ -79,12 +79,13 @@
                     break;
                 default:
                     $response_license_type = pg_escape_string(urldecode($_REQUEST['lic_type']));
-                    $response_license_role = '';
-                    $sep = '';
-                    foreach($_REQUEST['lic_role'] as $v) {
-                        $response_license_role .= $sep . $v;
-                        $sep = ',';
-                    }
+                    $response_license_role = pg_escape_string(urldecode($_REQUEST['lic_role']));
+                    // $response_license_role = '';
+                    // $sep = '';
+                    // foreach($_REQUEST['lic_role'] as $v) {
+                    //     $response_license_role .= $sep . $v;
+                    //     $sep = ',';
+                    // }
                     $q = "
                     INSERT INTO
                         licensing_responses (submit_time, user_id, assignment_id, license_type, license_roles, valid_response)
