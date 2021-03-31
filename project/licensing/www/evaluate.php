@@ -78,10 +78,10 @@
                     ";
                     break;
                 default:
-                    $response_license_type = pg_escape_string(urldecode($_REQUEST['license_type']));
+                    $response_license_type = pg_escape_string(urldecode($_REQUEST['lic_type']));
                     $response_license_role = '';
                     $sep = '';
-                    foreach($_REQUEST['license_role'] as $v) {
+                    foreach($_REQUEST['lic_role'] as $v) {
                         $response_license_role .= $sep . $v;
                         $sep = ',';
                     }
