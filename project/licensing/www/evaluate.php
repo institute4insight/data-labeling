@@ -107,7 +107,7 @@
                 LIMIT 1
                 ";
                 if ($res = $conn->query($q)) {
-                    $row = $res->fetch_asscoc();
+                    $row = $res->fetch_assoc();
                     $res->close();
                     $assignment_id = $row['assignment_id'];
                     $doc_id = $row['doc_id'];
