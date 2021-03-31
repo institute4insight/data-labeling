@@ -91,7 +91,7 @@
             WHERE user_id='$uid'
         ";
         if ($res1 = $conn->query($q1)) {
-            $row1 = $res1->fetch_asscoc();
+            $row1 = $res1->fetch_assoc();
             $res1->close();
 
             $n_completed = $row1['n_completed'];
