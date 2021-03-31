@@ -103,6 +103,7 @@
                     break;
             }
             $save_message = "<pre>$q</pre>";
+            echo $save_message;
             $res = $conn->query($q);
             // if (!$res) {
             //     echo "An error occurred.\n";
