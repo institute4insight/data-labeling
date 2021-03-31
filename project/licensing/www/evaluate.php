@@ -269,30 +269,42 @@
                         ?>
                         </div><!-- form-row -->
 
-                        <!-- <h4>Role of the  Involved Parties</h4> -->
-                        <p class='instructions'>Select the role of each of the companies that are listed below.</p>
-                        <?php
-                            foreach ($companies as $comp_id => $comp_name) {
-                                $rol = "role_" . $comp_id;
-                                echo "<div class=\"form-row\">";
-                                echo "<div class=\"col-md-4\">";
-                                echo "<label class=\"\" for=\"$rol\">$comp_name</label>";
-                                echo "</div>";
-                                echo "<div class=\"col-md-6\">";
-                                echo "<select class=\"custom-select\" id=\"$rol\" name=\"lic_role\">";
-                                echo "    <option selected>Choose...</option>";
-                                foreach ($license_role as $k => $v) {
-                                    echo "<option value=\"$comp_id=$k\">$v</option>";
-                                }
-                                echo "</select>";
-                                echo "</div></div><!-- form-row -->\n";
+                        <div class="form-row">
+                            <p class='instructions'>Select the role of each of the companies that are listed below.</p>
+                            <?php
+                                foreach ($companies as $comp_id => $comp_name) {
+                                    $rol = "role_" . $comp_id;
+                                    echo "<div class=\"form-row\">";
+                                    echo "<div class=\"col-md-4\">";
+                                    echo "<label class=\"\" for=\"$rol\">$comp_name</label>";
+                                    echo "</div>";
+                                    echo "<div class=\"col-md-6\">";
+                                    echo "<select class=\"custom-select\" id=\"$rol\" name=\"lic_role\">";
+                                    echo "    <option selected>Choose...</option>";
+                                    foreach ($license_role as $k => $v) {
+                                        echo "<option value=\"$comp_id=$k\">$v</option>";
+                                    }
+                                    echo "</select>";
+                                    echo "</div></div><!-- form-row -->\n";
 
-                            }   
-                        ?>
-                        <p class="instructions">
-                        Please make sure to complete the form before submitting.
-                        </p>
-                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                }   
+                            ?>
+                        </div><!-- form-row -->
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <p class="instructions">
+                                Please make sure to complete the form before submitting.
+                                </p>
+                                <button name="submit" value="submit" type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="instructions" style="text-align: right;">
+                                Use the "Skip this sample" button to proceedi f his page looks incomplete or distorted,
+                                 or you are unable to make a valid selection.
+                                </p>
+                                <button name="submit" value="skip" type="submit" class="btn btn-danger">Skip this sample</button>
+                            </div>
+                        </div><!-- form-row -->
                     </div>
                 </form>
             </div><!-- .row -->
