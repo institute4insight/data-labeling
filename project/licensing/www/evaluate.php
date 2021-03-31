@@ -63,7 +63,7 @@
             $response_user_id = pg_escape_string(urldecode($_REQUEST['user_id']));
             switch ($_REQUEST['submit']) {
                 case 'skip':
-                    q = "
+                    $q = "
                         INSERT INTO
                             licensing_responses (submit_time, user_id, assignment_id, license_type, license_roles, valid_response)
                         VALUES (
@@ -83,9 +83,9 @@
                     $sep = '';
                     foreach($_REQUEST['license_role'] as $v) {
                         $response_license_role .= $sep . $v;
-                        $sep = ','
+                        $sep = ',';
                     }
-                    q = "
+                    $q = "
                     INSERT INTO
                         licensing_responses (submit_time, user_id, assignment_id, license_type, license_roles, valid_response)
                     VALUES (
@@ -97,10 +97,11 @@
                         1
                     )
                     ON CONFLICT (assignment_id) DO NOTHING
-                ";
+                    ";
+                    break;
             }
             $save_message = "<pre>$q</pre>";
-            $res = conn->query($q)
+            $res = $conn->query($q);
             if (!$res) {
                 echo "An error occurred.\n";
                 exit;
