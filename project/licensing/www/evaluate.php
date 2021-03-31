@@ -269,7 +269,7 @@
                         ?>
                         </div><!-- form-row -->
 
-                        <div class="form-row">
+                        <!-- <div class="form-row"> -->
                             <p class='instructions'>Select the role of each of the companies that are listed below.</p>
                             <?php
                                 foreach ($companies as $comp_id => $comp_name) {
@@ -289,7 +289,7 @@
 
                                 }   
                             ?>
-                        </div><!-- form-row -->
+                        <!-- </div>< ! - - form-row -->
                         <div class="form-row">
                             <div class="col-md-6">
                                 <p class="instructions">
