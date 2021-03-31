@@ -246,7 +246,7 @@
             </div><!-- .row -->
             <!-- form -->
             <div class="row" style="margin-top: 10px">
-                <form method="POST"> 
+                <form class="col-md-12" method="POST"> 
                 <div class="col-md-12" >
                     <!-- <h4>Type of License</h4> -->
                     <p class="instructions">
