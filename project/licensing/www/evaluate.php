@@ -81,7 +81,7 @@
                 SELECT a.user_id
                      , SUM(CASE WHEN r.submit_time IS NOT NULL THEN 1 ELSE 0 END) AS n_completed
                      , COUNT(a.assignment_ID) AS n_total
-                FROM FROM licensing_assignments a
+                FROM licensing_assignments a
                 LEFT JOIN licensing_responses r
                 on a.assignment_id=r.assignment_id
                 GROUP BY a.user_id
@@ -247,49 +247,53 @@
             <!-- form -->
             <div class="row" style="margin-top: 10px">
                 <form class="col-md-12" method="POST"> 
-                <div class="col-md-12" >
-                    <!-- <h4>Type of License</h4> -->
-                    <p class="instructions">
-                    Select the type of licences in this announcement.
-                    </p>
-                    <!-- <div class="form-check form-check-inline"> -->
-                    <div class="form-row">
-                    <?php
-                    foreach ($license_type as $k => $v) {
-                        $nam = "type_" . $k;
-                        echo "<div class=\"col-md-2\">";
-                        echo "<input class=\"form-check-input\" type=\"radio\" name=\"lic_type\" id=\"$nam\" value=\"$k\">";
-                        echo "<label class=\"form-check-label\" for=\"$nam\">$v</label>";
-                        echo "</div>";
-                    }
-                    ?>
-                    </div><!-- form-row -->
-
-                    <!-- <h4>Role of the  Involved Parties</h4> -->
-                    <p class='instructions'>Select the role of each of the companies that are listed below.</p>
-                    <?php
-                        foreach ($companies as $comp_id => $comp_name) {
-                            $rol = "role_" . $comp_id;
-                            echo "<div class=\"form-row\">";
-                            echo "<div class=\"col-md-4\">";
-                            echo "<label class=\"\" for=\"$rol\">$comp_name</label>";
+                    <input type="hidden" name="assignment_id" value="<?= $assignment_id?>" />
+                    <input type="hidden" name="user_id" value="<?= $uid?>" />
+                    <input type="hidden" name="n_total" value="<?= $n_total?>" />
+                    <input type="hidden" name="n_completed" value="<?= $n_completed?>" />
+                    <div class="col-md-12" >
+                        <!-- <h4>Type of License</h4> -->
+                        <p class="instructions">
+                        Select the type of licences in this announcement.
+                        </p>
+                        <!-- <div class="form-check form-check-inline"> -->
+                        <div class="form-row">
+                        <?php
+                        foreach ($license_type as $k => $v) {
+                            $nam = "type_" . $k;
+                            echo "<div class=\"col-md-2\">";
+                            echo "<input class=\"form-check-input\" type=\"radio\" name=\"lic_type\" id=\"$nam\" value=\"$k\">";
+                            echo "<label class=\"form-check-label\" for=\"$nam\">$v</label>";
                             echo "</div>";
-                            echo "<div class=\"col-md-6\">";
-                            echo "<select class=\"custom-select\" id=\"$rol\" name=\"lic_role\">";
-                            echo "    <option selected>Choose...</option>";
-                            foreach ($license_role as $k => $v) {
-                                echo "<option value=\"$comp_id^$k\">$v</option>";
-                            }
-                            echo "</select>";
-                            echo "</div></div><!-- form-row -->\n";
+                        }
+                        ?>
+                        </div><!-- form-row -->
 
-                        }   
-                    ?>
-                    <p class="instructions">
-                    Please make sure to complete the form before submitting.
-                    </p>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                        <!-- <h4>Role of the  Involved Parties</h4> -->
+                        <p class='instructions'>Select the role of each of the companies that are listed below.</p>
+                        <?php
+                            foreach ($companies as $comp_id => $comp_name) {
+                                $rol = "role_" . $comp_id;
+                                echo "<div class=\"form-row\">";
+                                echo "<div class=\"col-md-4\">";
+                                echo "<label class=\"\" for=\"$rol\">$comp_name</label>";
+                                echo "</div>";
+                                echo "<div class=\"col-md-6\">";
+                                echo "<select class=\"custom-select\" id=\"$rol\" name=\"lic_role\">";
+                                echo "    <option selected>Choose...</option>";
+                                foreach ($license_role as $k => $v) {
+                                    echo "<option value=\"$comp_id=$k\">$v</option>";
+                                }
+                                echo "</select>";
+                                echo "</div></div><!-- form-row -->\n";
+
+                            }   
+                        ?>
+                        <p class="instructions">
+                        Please make sure to complete the form before submitting.
+                        </p>
+                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </form>
             </div><!-- .row -->
 
