@@ -106,7 +106,7 @@
                 ORDER BY a.sort_order
                 LIMIT 1
                 ";
-                if ($res = db_query($q)) {
+                if ($res = $conn->query($q)) {
                     $row = $res->fetch_asscoc();
                     $res->close();
                     $assignment_id = $row['assignment_id'];
