@@ -80,6 +80,12 @@ h1 {margin-bottom: 1em;}
     border: solid rgba(50, 50, 50, 0.75) 1px;
 }
 
+.text-view-long {
+    max-height: 30em;
+    overflow-y: scroll;
+    border: solid rgba(50, 50, 50, 0.75) 1px;
+}
+
 .text-hidden {
     display: none;
 }
@@ -89,6 +95,13 @@ h1 {margin-bottom: 1em;}
     color: steelblue;
     font-style: italic;
 }
+
+.instructions-tiny {
+    /* margin-top: 4em; */
+    color: steelblue;
+    font-style: italic;
+}
+
 
 .instructions-left {
     text-align: right;
