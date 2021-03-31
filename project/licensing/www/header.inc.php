@@ -9,7 +9,7 @@
             "password": "Databaswe Password"
         }
         */
-        $creds = json_decode(file_get_contents(".dbcredentials.json"), true);
+        $creds = json_decode(file_get_contents("/var/www/html/surveys/licensing/.dbcredentials.json"), true);
         $dbconn = new mysqli($creds['host'], $creds['user'], $creds['password'], "datalabeling")
             or die('Could not connect: ' . $dbconn->connect_error);
         return $dbconn;
