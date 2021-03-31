@@ -228,7 +228,11 @@
         list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id);
     } else {
         list($assignment_id, $doc_id, $n_completed, $n_total) = get_next_assignment($uid);
-        list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id);
+        if ($n_completed>=$n_total) {
+            header('Location: completed.php');
+        } else {
+            list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id);
+        }
     }
 
 
