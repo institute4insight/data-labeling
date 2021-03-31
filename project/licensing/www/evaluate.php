@@ -58,7 +58,7 @@
     
 
     function process_response() {
-        if (isset($_REQUEST, $_REQUEST['user_id'], $_REQUEST['assignment_id'], $_REQUEST['submit'])) {
+        if (isset($_REQUEST, $_REQUEST['doc_id'], $_REQUEST['user_id'], $_REQUEST['assignment_id'], $_REQUEST['submit'])) {
             $conn = db_connect();
             $response_assignment_id = pg_escape_string(urldecode($_REQUEST['assignment_id']));
             $response_user_id = pg_escape_string(urldecode($_REQUEST['user_id']));
@@ -66,10 +66,13 @@
             switch ($_REQUEST['submit']) {
                 case 'skip':
                     $q = "
-                        INSERT INTO
-                            licensing_responses (submit_time, user_id, assignment_id, license_type, license_roles, valid_response)
+                        INSERT INTO licensing_responses (
+                                submit_time, doc_id, user_id, assignment_id,
+                                 license_type, license_roles, valid_response
+                        )
                         VALUES (
                             NOW(),
+                            '$response_doc_id',
                             '$response_user_id',
                             '$response_assignment_id',
                             NULL,
@@ -89,10 +92,13 @@
                     //     $sep = ',';
                     // }
                     $q = "
-                    INSERT INTO
-                        licensing_responses (submit_time, user_id, assignment_id, license_type, license_roles, valid_response)
+                    INSERT INTO licensing_responses (
+                            submit_time, doc_id, user_id, assignment_id,
+                            license_type, license_roles, valid_response
+                    )
                     VALUES (
                         NOW(),
+                        '$response_doc_id',
                         '$response_user_id',
                         '$response_assignment_id',
                         '$response_license_type',
