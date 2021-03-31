@@ -16,22 +16,25 @@
         }
     }
 
-    if (!isset($_SESSION['survey_licensing'])) {
-        $_SESSION['survey_licensing'] = [];
-    }
-
-    // without user_id goto login page
-    if (!isset($_SESSION['survey_licensing']['user_id'])) {
-        header("Location: index.php");
-        die();
-    }
-
-    if (isset($_SESSION, $_SESSION['survey_licensing'], $_SESSION['survey_licensing']['user_id'])) {
-        $uid = $_SESSION['survey_licensing']['user_id'];
+    if (isset($_GET, $_GET['doc'])) {
+        // just preview doc
     } else {
-        $uid = "nobody";
+        if (!isset($_SESSION['survey_licensing'])) {
+            $_SESSION['survey_licensing'] = [];
+        }
+
+        // without user_id goto login page
+        if (!isset($_SESSION['survey_licensing']['user_id'])) {
+            header("Location: index.php");
+            die();
+        }
+
+        if (isset($_SESSION, $_SESSION['survey_licensing'], $_SESSION['survey_licensing']['user_id'])) {
+            $uid = $_SESSION['survey_licensing']['user_id'];
+        } else {
+            $uid = "nobody";
+        }
     }
-    
 
     // assignment_id: bwr0000020010710dx4q025ce^nmarin1
     // user_id: nmarin1
