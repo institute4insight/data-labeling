@@ -33,9 +33,6 @@
     }
     
 
-    $save_message = "";
-
-
     // assignment_id: bwr0000020010710dx4q025ce^nmarin1
     // user_id: nmarin1
     // n_total: 1438
@@ -80,7 +77,7 @@
                 default:
                     $response_license_type = pg_escape_string(urldecode($_REQUEST['lic_type']));
                     ## $response_license_role = pg_escape_string(urldecode($_REQUEST['lic_role']));
-                    $response_license_role = implode($_REQUEST['lic_role'], ',');
+                    $response_license_role = implode($_REQUEST['lic_role'], '|');
                     // $response_license_role = '';
                     // $sep = '';
                     // foreach($_REQUEST['lic_role'] as $v) {
@@ -98,25 +95,24 @@
                         '$response_license_role',
                         1
                     )
-                    ON CONFLICT (assignment_id) DO NOTHING
                     ";
                     break;
             }
             $save_message = "<pre>$q</pre>";
-            echo $save_message;
+            // echo $save_message;
             $res = $conn->query($q);
             if (!$res) {
-                echo $conn->error;
-            //     exit;
+                $save_message = "<div><p>" . $conn->error . "</p>$save_message</div>";
             }
             // $res->close();
             $conn->close();
         } else {
             $save_message = "<div>Nothing to do...</div>";
         }
+        return $save_message;
     }
 
-    $res = process_response();
+    $response_message = process_response();
 
     function get_next_assignment($uid) {
 
@@ -330,7 +326,7 @@
                                     echo "</div>";
                                     echo "<div class=\"col-md-6\">";
                                     echo "<select class=\"custom-select\" id=\"$rol\" name=\"lic_role[]\">";
-                                    echo "    <option selected>Choose...</option>";
+                                    echo "    <option value=\"$comp_id=NULL\" selected>Choose...</option>";
                                     foreach ($license_role as $k => $v) {
                                         echo "<option value=\"$comp_id=$k\">$v</option>";
                                     }
@@ -361,7 +357,7 @@
 
         </div>
 
-        <!-- <?= $save_message ?> -->
+        <!-- <?= $response_message ?> -->
 
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
