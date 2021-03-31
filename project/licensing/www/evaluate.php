@@ -297,9 +297,9 @@
                                 </p>
                                 <button name="submit" value="submit" type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                            <div class="col-md-6">
-                                <p class="instructions" style="text-align: right;">
-                                Use the "Skip this sample" button to proceedi f his page looks incomplete or distorted,
+                            <div class="col-md-6" style="text-align: right;">
+                                <p class="instructions">
+                                Use the "Skip this sample" button to proceed if his page looks incomplete or distorted,
                                  or you are unable to make a valid selection.
                                 </p>
                                 <button name="submit" value="skip" type="submit" class="btn btn-danger">Skip this sample</button>
