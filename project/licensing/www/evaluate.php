@@ -106,7 +106,7 @@
             echo $save_message;
             $res = $conn->query($q);
             if (!$res) {
-                echo $conn->error
+                echo $conn->error;
             //     exit;
             }
             // $res->close();
