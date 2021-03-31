@@ -18,6 +18,7 @@
 
     if (isset($_GET, $_GET['doc'])) {
         // just preview doc
+        $uid = "anonymous"
     } else {
         if (!isset($_SESSION['survey_licensing'])) {
             $_SESSION['survey_licensing'] = [];
@@ -32,7 +33,7 @@
         if (isset($_SESSION, $_SESSION['survey_licensing'], $_SESSION['survey_licensing']['user_id'])) {
             $uid = $_SESSION['survey_licensing']['user_id'];
         } else {
-            $uid = "nobody";
+            $uid = "anonymous";
         }
     }
 
@@ -168,7 +169,7 @@
 
 
     function get_sample_doc($doc_id) {
-        // $assignment_id = "nobody_nothing";
+        // $assignment_id = "anonymous_nothing";
         // $doc_id = "PRN0000020040420e04j00001";
         $content = htmlentities(file_get_contents("samples/content.txt"));
         $license_sents = htmlentities(file_get_contents("samples/license_sents.txt"));
