@@ -161,7 +161,7 @@
             FROM licensing_doc_company
             WHERE doc_id='$doc_id'
             ";
-            if ($res2 = $conn->query(q2)) {
+            if ($res2 = $conn->query($q2)) {
                 while ($row2 = $res2->fetch_assoc()) {
                     $companies[$row2['company_id']] = $row2['company_name'];
                 }
@@ -178,6 +178,8 @@
     if (isset($_REQUEST, $_REQUEST['doc'])) {
         $doc_id = $_REQUEST['doc'];
         $assignment_id = "$doc_id^$uid";
+        $n_total = 0;
+        $n_completed = 0;
         list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id);
     } else {
         list($assignment_id, $doc_id, $n_completed, $n_total) = get_next_assignment($uid);
