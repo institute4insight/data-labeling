@@ -290,11 +290,11 @@
                 </div>
             </div><!-- .row -->
             <div class="row" style="margin-top: 10px">
-                <div class="col-md-12 instructions-left">
+                <div class="col-md-12 instructions">
                     Do you need to read more of the document to make your selection? Click <a id="show_all_cta" href="####">here</a> see the entire document.
                 </div>
                 <!-- <div class="col-md-10 offset-md-1 text-view" > -->
-                <div class="col-md-10 text-view text-hidden" id="show_all" >
+                <div class="col-md-10 offset-md-2 text-view text-hidden" id="show_all" >
                     <?= $content ?>
                 </div>
             </div><!-- .row -->
@@ -376,7 +376,8 @@
             console.log("document ready")
             console.log(`current assignment_id: "<?= $assignment_id ?>"`)
             $("#show_all_cta").click(function(){
-                    console.log("hello");
+                    console.log("toggle");
+                    $("#show_all").toggleClass("text-hidden");
                 })
             // $("button").click(function(){
             //     console.log("response...")
