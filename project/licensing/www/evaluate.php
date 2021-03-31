@@ -26,7 +26,12 @@
         die();
     }
 
-    $uid = $_SESSION['survey_licensing']['user_id'];
+    if (isset($_SESSION, $_SESSION['survey_licensing'], $_SESSION['survey_licensing']['user_id'])) {
+        $uid = $_SESSION['survey_licensing']['user_id'];
+    } else {
+        $uid = "nobody";
+    }
+    
 
     $save_message = "";
 
@@ -64,13 +69,55 @@
     $res = process_response();
 
     function get_next_assignment($uid) {
+
+        $assignment_id = '';
+        $doc_id = '';
+        $n_total = 0;
+        $n_completed = 0;
+        $conn = db_connect();
+        // query number of assignments and completed assignments
+        $q1 = "
+        WITH compstats AS (
+                SELECT a.user_id
+                     , SUM(CASE WHEN r.submit_time IS NOT NULL THEN 1 ELSE 0 END) AS n_completed
+                     , COUNT(a.assignment_ID) AS n_total
+                FROM FROM licensing_assignments a
+                LEFT JOIN licensing_responses r
+                on a.assignment_id=r.assignment_id
+                GROUP BY a.user_id
+            )
+            SELECT user_id, n_completed, n_total
+            FROM compstats
+            WHERE user_id='$uid'
+        ";
+        if ($res1 = $conn->query($q1)) {
+            $row1 = $res1->fetch_asscoc();
+            $res1->close();
+
+            $n_completed = $row1['n_completed'];
+            $n_total = $row1['n_total'];
+            if ($n_completed<$n_total) {
+                $q = "
+                SELECT a.*
+                FROM licensing_assignments a
+                LEFT JOIN licensing_responses r
+                on a.assignment_id=r.assignment_id
+                WHERE r.submit_time IS NULL AND a.user_id='$uid'
+                ORDER BY a.sort_order
+                LIMIT 1
+                ";
+                if ($res = db_query($q)) {
+                    $row = $res->fetch_asscoc();
+                    $res->close();
+                    $assignment_id = $row['assignment_id'];
+                    $doc_id = $row['doc_id'];
+                }
+            }
+        }
+        $conn->close();
         return array($assignment_id, $doc_id, $n_completed, $n_total);
     }
 
-    //list($assignment_id, $doc_id, $n_completed, $n_total) = get_next_assignment($uid)
-
-    // development
-    list($assignment_id, $doc_id, $n_completed, $n_total) = array("nobody_nothing", "PRN0000020040420e04j00001", 0, 100);
 
     function get_sample_doc($doc_id) {
         // $assignment_id = "nobody_nothing";
@@ -88,70 +135,57 @@
     }
 
     function get_doc($doc_id) {
+        // returns $content, $license_sents, $key_sents, $companies
+        $content = "";
+        $license_sents = "";
+        $key_sents = "";
+        $companies = [];
+
         // get next assignment record
         $conn = db_connect();
-        // $q = "
-        //     WITH all_assignments AS (
-        //         SELECT * FROM licensing_assignments
-        //     ), tab AS (
-        //         SELECT a.*, r.label, r.ts
-        //         FROM all_assignments a
-        //         LEFT JOIN licensing_responses r
-        //         ON r.assignment_id=a.assignment_id
-        //         WHERE userid='$uid'
-        //     )
-        //     SELECT *,
-        //         (SELECT COUNT(1) FROM tab WHERE NOT label IS NULL) AS n_completed,
-        //         (SELECT COUNT(1) FROM tab) AS n_total 
-        //     FROM tab
-        //     WHERE label IS NULL
-        //     ORDER BY pos
-        //     LIMIT 1
-        // ";
-        // $res = pg_query($conn, $q);
-        // if (!$res) {
-        //     echo "An error occurred.\n";
-        //     exit;
-        // }
+        
+        $q = "
+        SELECT doc_id, license_sents, key_sents
+        FROM licensing_documents
+        WHERE doc_id='$doc_id'
+        ";
+        if ($res = $conn->query($q)) {
+            $row = $res->fetch_assoc();
+            $res->close();
+            $content = $row['content'];
+            $license_sents = $row['license_sents'];
+            $key_sents = $row['key_sents'];
 
-        // // if nothing left to do go to completed page
-        // if (pg_num_rows($res)==0) {
-        //     // $_SESSION['survey_licensing']['stage'] = 'data';
-        //     // header("Location: data.php");
-        //     $_SESSION['survey_licensing']['stage'] = 'completed';
-        //     header("Location: completed.php");
-        //     die();
-        // }
+            $q2 = "
+            SELECT doc_id, company_name, company_id
+            FROM licensing_doc_company
+            WHERE doc_id='$doc_id'
+            ";
+            if ($res2 = $conn->query(q2)) {
+                while ($row2 = $res2->fetch_assoc()) {
+                    $companies[$row2['company_id']] = $row2['company_name'];
+                }
+                $res2->close();
+            }
+            
+        }
 
-        // $row = pg_fetch_assoc($res);
-        // // returned row: {
-        // //     "assignment_id" => string(74) "4|Dis_similar_images/7331_3885_29.jpg|Dis_similar_images/3895_14035_72.jpg",
-        // //     "pos" => string(1) "1",
-        // //     "title" => string(5) "Fonts",
-        // //     "question" => string(82) "Do you see text in the two images that use the same – or very similar – fonts?",
-        // //     "idx"=> string(1) "4"
-        // //     "a_img"]=> string(35) "Dis_similar_images/7331_3885_29.jpg",
-        // //     "a_idx"]=> string(4) "2953",
-        // //     "b_img"]=> string(36) "Dis_similar_images/3895_14035_72.jpg",
-        // //     "b_idx"]=> string(5) "10103"
-        // // }
-
-        // $assignment_id = $row["assignment_id"];
-        // $qn = (int)$row["idx"];
-        // $picurl_left = "image_data/" . str_replace('"', '', $row["a_img"]);
-        // $picurl_right = "image_data/" . str_replace('"', '', $row["b_img"]);
-        // $n_completed = (int)$row["n_completed"];
-        // $n_total = (int)$row["n_total"];
-
-        // db_free_result($res);
-        // db_close($conn);
+        $conn->close();
 
         return array($content, $license_sents, $key_sents, $companies);
     }
   
+    if (isset($_REQUEST, $_REQUEST['doc'])) {
+        $doc_id = $_REQUEST['doc'];
+        $assignment_id = "$doc_id^$uid";
+        list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id);
+    } else {
 
-    list($content, $license_sents, $key_sents, $companies) = get_sample_doc($doc_id);
-    // list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id)
+    }
+
+
+    //list($content, $license_sents, $key_sents, $companies) = get_sample_doc($doc_id);
+    list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id)
 ?>
 
 <HTML lang="eng">
