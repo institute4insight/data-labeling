@@ -104,10 +104,10 @@
             }
             $save_message = "<pre>$q</pre>";
             $res = $conn->query($q);
-            if (!$res) {
-                echo "An error occurred.\n";
-                exit;
-            }
+            // if (!$res) {
+            //     echo "An error occurred.\n";
+            //     exit;
+            // }
             $res->close();
             $conn->close();
         } else {
