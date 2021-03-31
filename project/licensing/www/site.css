@@ -80,6 +80,10 @@ h1 {margin-bottom: 1em;}
     border: solid rgba(50, 50, 50, 0.75) 1px;
 }
 
+.text-hidden {
+    display: none;
+}
+
 .instructions {
     margin-top: 4em;
     color: steelblue;
