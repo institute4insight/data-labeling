@@ -71,7 +71,6 @@
                             NULL,
                             0
                         )
-                        ON CONFLICT (assignment_id) DO NOTHING
                     ";
                     break;
                 default:
@@ -288,6 +287,15 @@
                 <!-- <div class="col-md-10 offset-md-1 text-view" > -->
                 <div class="col-md-10 text-view" >
                     <?= $key_sents ?>
+                </div>
+            </div><!-- .row -->
+            <div class="row" style="margin-top: 10px">
+                <div class="col-md-12 instructions-left">
+                    Do you need to read more of the document to make your selection? Click <a id="show-all-cta" href="####">here</a> see the entire document.
+                </div>
+                <!-- <div class="col-md-10 offset-md-1 text-view" > -->
+                <div class="col-md-10 text-view text-hidden" id="show-all" >
+                    <?= $content ?>
                 </div>
             </div><!-- .row -->
             <!-- form -->
