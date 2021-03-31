@@ -207,7 +207,10 @@
                 <div class="col-md-12">       
                     <p style="text-align: right;"><i>
                         <b>User:</b> <?= $uid ?>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <b>Progress:</b> <?= $n_completed ?>/<?= $n_total ?>&nbsp;(<?= round(100.0 * $n_completed / $n_total)?>%)
+                        <b>Progress:</b> <?= $n_completed ?>/<?= $n_total ?>
+                        <?php
+                            if ($n_total>0) { echo "&nbsp;(". round(100.0 * $n_completed / $n_total) . "%)";}
+                        ?>
                         </i>
                         &nbsp;&nbsp;&nbsp;&nbsp;<a href="logout.php">(Log out)</a>
                     </p>
