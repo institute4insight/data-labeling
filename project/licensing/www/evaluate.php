@@ -62,6 +62,7 @@
             $conn = db_connect();
             $response_assignment_id = pg_escape_string(urldecode($_REQUEST['assignment_id']));
             $response_user_id = pg_escape_string(urldecode($_REQUEST['user_id']));
+            $response_doc_id = pg_escape_string(urldecode($_REQUEST['doc_id']));
             switch ($_REQUEST['submit']) {
                 case 'skip':
                     $q = "
@@ -311,6 +312,7 @@
                 <form class="col-md-12" method="POST"> 
                     <input type="hidden" name="assignment_id" value="<?= $assignment_id?>" />
                     <input type="hidden" name="user_id" value="<?= $uid?>" />
+                    <input type="hidden" name="doc_id" value="<?= $doc_id?>" />
                     <input type="hidden" name="n_total" value="<?= $n_total?>" />
                     <input type="hidden" name="n_completed" value="<?= $n_completed?>" />
                     <div class="col-md-12" >
