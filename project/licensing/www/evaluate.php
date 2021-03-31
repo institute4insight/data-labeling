@@ -105,11 +105,11 @@
             $save_message = "<pre>$q</pre>";
             echo $save_message;
             $res = $conn->query($q);
-            // if (!$res) {
-            //     echo "An error occurred.\n";
+            if (!$res) {
+                echo $conn->error
             //     exit;
-            // }
-            $res->close();
+            }
+            // $res->close();
             $conn->close();
         } else {
             $save_message = "<div>Nothing to do...</div>";
