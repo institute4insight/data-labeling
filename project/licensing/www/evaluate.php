@@ -18,7 +18,7 @@
 
     if (isset($_GET, $_GET['doc'])) {
         // just preview doc
-        $uid = "anonymous"
+        $uid = "anonymous";
     } else {
         if (!isset($_SESSION['survey_licensing'])) {
             $_SESSION['survey_licensing'] = [];
