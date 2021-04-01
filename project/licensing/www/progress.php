@@ -20,7 +20,7 @@
     $progress_cols = ['user_id', 'n_completed', 'n_total', 'first_submission', 'last_submission'];
 
     function html_progress($progress) {
-        echo "<table>";
+        echo "<table class="table">";
         echo "<tr>";
         foreach($progress[0] as $k => $v) {
             echo "<th>$k</th>";
@@ -55,7 +55,7 @@
                 on a.assignment_id=r.assignment_id
                 GROUP BY a.user_id
             )
-            SELECT user_id, n_completed, n_total
+            SELECT user_id, n_completed, n_total, first_submission, last_submission
             FROM compstats
             ORDER BY user_id
         ";
