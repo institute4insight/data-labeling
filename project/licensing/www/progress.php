@@ -28,7 +28,7 @@
         echo "</tr>";
         foreach($progress as $pr) {
             echo "<tr>";
-            foreach($pr[0] as $k => $v) {
+            foreach($pr as $k => $v) {
                 echo "<td>$v</td>";
             }
             echo "</tr>";
