@@ -66,7 +66,7 @@
             $res->close();
         }
         $conn->close();
-        return progress;
+        return $progress;
     }
   
     
