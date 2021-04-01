@@ -37,7 +37,7 @@
 
     $license_type = [
         "cross" => "Cross",
-        "joint" => "Joint",
+        // "joint" => "Joint",
         "regular" => "Regular",
         "exclusive" => "Exclusive",
         "renew" => "Renew",
