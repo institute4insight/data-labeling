@@ -95,11 +95,12 @@
                     // }
                     $q = "
                     INSERT INTO licensing_responses (
-                            submit_time, doc_id, user_id, assignment_id,
+                            submit_time, display_time, doc_id, user_id, assignment_id,
                             license_type, license_roles, valid_response
                     )
                     VALUES (
                         NOW(),
+                        '$response_display_time',
                         '$response_doc_id',
                         '$response_user_id',
                         '$response_assignment_id',
