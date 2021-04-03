@@ -63,15 +63,17 @@
             $response_assignment_id = pg_escape_string(urldecode($_REQUEST['assignment_id']));
             $response_user_id = pg_escape_string(urldecode($_REQUEST['user_id']));
             $response_doc_id = pg_escape_string(urldecode($_REQUEST['doc_id']));
+            $response_display_time = pg_escape_string(urldecode($_REQUEST['display_time']));
             switch ($_REQUEST['submit']) {
                 case 'skip':
                     $q = "
                         INSERT INTO licensing_responses (
-                                submit_time, doc_id, user_id, assignment_id,
+                                submit_time, display_time, doc_id, user_id, assignment_id,
                                  license_type, license_roles, valid_response
                         )
                         VALUES (
                             NOW(),
+                            '$response_display_time',
                             '$response_doc_id',
                             '$response_user_id',
                             '$response_assignment_id',
@@ -201,7 +203,7 @@
         $conn = db_connect();
         
         $q = "
-        SELECT doc_id, content, license_sents, key_sents
+        SELECT doc_id, content, license_sents, key_sents, NOW() as display_time
         FROM licensing_documents
         WHERE doc_id='$doc_id'
         ";
@@ -211,6 +213,7 @@
             $content = $row['content'];
             $license_sents = $row['license_sents'];
             $key_sents = $row['key_sents'];
+            $display_time = $row['display_time'];
 
             $q2 = "
             SELECT doc_id, company_name, company_id
@@ -317,10 +320,11 @@
             <div class="row" style="margin-top: 10px">
                 <form class="col-md-12" method="POST"> 
                     <input type="hidden" name="assignment_id" value="<?= $assignment_id?>" />
-                    <input type="hidden" name="user_id" value="<?= $uid?>" />
-                    <input type="hidden" name="doc_id" value="<?= $doc_id?>" />
-                    <input type="hidden" name="n_total" value="<?= $n_total?>" />
-                    <input type="hidden" name="n_completed" value="<?= $n_completed?>" />
+                    <input type="hidden" name="user_id" value="<?= $uid ?>" />
+                    <input type="hidden" name="doc_id" value="<?= $doc_id ?>" />
+                    <input type="hidden" name="n_total" value="<?= $n_total ?>" />
+                    <input type="hidden" name="n_completed" value="<?= $n_completed ?>" />
+                    <input type="hidden" name="display_time" value="<?= $display_time ?>" />
                     <div class="col-md-12" >
                         <!-- <h4>Type of License</h4> -->
                         <p class="instructions">

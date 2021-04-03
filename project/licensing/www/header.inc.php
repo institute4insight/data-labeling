@@ -6,7 +6,7 @@
             "host": "HOSTNAME",
             "dbname": "DATABASE NAME",
             "user": "User Name for this application",
-            "password": "Databaswe Password"
+            "password": "Database Password"
         }
         */
         $creds = json_decode(file_get_contents("/var/www/html/surveys/licensing/.dbcredentials.json"), true);
