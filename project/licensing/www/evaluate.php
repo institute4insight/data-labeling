@@ -189,8 +189,9 @@
             "IL_YANG" => "IL YANG Pharmaceutical Co.",
             "OXYGENT" => "Oxygent(TM)"
         ];
+        $display_time = date("Y-m-d H:i:s", time());
 
-        return array($content, $license_sents, $key_sents, $companies);
+        return array($content, $license_sents, $key_sents, $companies, $display_time);
     }
 
     function get_doc($doc_id) {
@@ -232,7 +233,7 @@
 
         $conn->close();
 
-        return array($content, $license_sents, $key_sents, $companies);
+        return array($content, $license_sents, $key_sents, $companies, $display_time);
     }
   
     if (isset($_REQUEST, $_REQUEST['doc'])) {
@@ -240,13 +241,13 @@
         $assignment_id = "$doc_id^$uid";
         $n_total = 0;
         $n_completed = 0;
-        list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id);
+        list($content, $license_sents, $key_sents, $companies, $display_time) = get_doc($doc_id);
     } else {
         list($assignment_id, $doc_id, $n_completed, $n_total) = get_next_assignment($uid);
         if ($n_completed>=$n_total) {
             header('Location: completed.php');
         } else {
-            list($content, $license_sents, $key_sents, $companies) = get_doc($doc_id);
+            list($content, $license_sents, $key_sents, $companies, $display_time) = get_doc($doc_id);
         }
     }
 
