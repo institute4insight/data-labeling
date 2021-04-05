@@ -11,6 +11,7 @@ import os
 import json
 import sys
 import re
+import datetime
 import numpy as np
 import pandas as pd
 import sqlalchemy as sa
@@ -62,7 +63,7 @@ def get_text(conn, html_format=True):
 
     hours_since_start = (datetime.datetime.now()-start_date).total_seconds()/3600
     hour_rate = total_number_of_respones / hours_since_start
-    hours_to_do = (total_number_of_assignments - total_number_of_respones)*hour_rate
+    hours_to_do = (total_number_of_assignments - total_number_of_respones)/hour_rate
     completed_by = (datetime.datetime.now() + datetime.timedelta(hours=hours_to_do)).strftime('%A, %B %d, %Y after %Hh')
 
     paragraph.append(f"""
