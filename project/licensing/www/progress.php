@@ -77,7 +77,7 @@
 
 <HTML lang="eng">
     <HEAD>
-        <TITLE>Survey</TITLE>
+        <TITLE>Progress</TITLE>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -90,6 +90,7 @@
             <div class="row">
                 <div class="col-md-12">       
                     <h1>Progress</h1>
+                    <?php passthru("/var/www/html/surveys/licensing/bin/summary_text.py"); ?>
                     <?php
                         $progress = get_progress();
                         html_progress($progress)
