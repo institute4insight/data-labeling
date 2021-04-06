@@ -90,7 +90,8 @@
             <div class="row">
                 <div class="col-md-12">       
                     <h1>Progress</h1>
-                    <?php passthru("/var/www/html/surveys/licensing/bin/summary_text.py"); ?>
+                    <!-- <?php passthru("/var/www/html/surveys/licensing/bin/summary_text.py"); ?> -->
+                    <div id="summary-text"></div>
                     <?php
                         $progress = get_progress();
                         html_progress($progress)
@@ -108,6 +109,7 @@
         <script>
         
         $(document).ready(function(){
+            $("#summary-text").load("http://arc.insight.gsu.edu/cgi-bin/summary_text.cgi")
             console.log("document ready")
         })
         </script>
