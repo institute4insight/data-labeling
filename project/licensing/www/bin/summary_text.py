@@ -19,7 +19,7 @@ import sqlalchemy as sa
 
 def get_connection():
     # load database credentials and change database to "datalabeling"
-    db_creds = json.load(open(f"/home/{os.environ['USER']}/.arc_config/databases/sqlserver-2-3306.txt"))
+    db_creds = json.load(open(f"/var/www/html/surveys/licensing/.dbcredentials.json"))
     connection_uri = '/'.join( db_creds['default_uri'].split('/')[:3] + ['datalabeling'])
 
     # create connection
