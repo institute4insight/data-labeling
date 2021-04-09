@@ -324,14 +324,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2">
-                    <a href="?goback=1">
-                        <button
-                            aria-disabled="<?= $n_completed>0 ? 'false' : 'true' ?>"
-                            class="btn btn-sm btn-warning <?= n_completed>0 ? '' : 'disabled' ?>"
-                        >
-                            Go back
-                        </button>
-                    </a>
+                    <button id="go_back_cta"
+                        aria-disabled="<?= $n_completed>0 ? 'false' : 'true' ?>"
+                        class="btn btn-sm btn-warning <?= n_completed>0 ? '' : 'disabled' ?>"
+                    >
+                        Go back
+                    </button>
                 </div>
                 <div class="col-md-10">       
                     <p style="text-align: right;"><i>
@@ -465,14 +463,10 @@
                     console.log("toggle");
                     $("#show_all").toggleClass("text-hidden");
                 })
-            // $("button").click(function(){
-            //     console.log("response...")
-            //     let assignment_id = "<?= $assignment_id ?>";
-            //     console.log(""+assignment_id)
-            //     // var url = `?a=${encodeURI(assignment_id)}&r=${encodeURI($(this).text().toLowerCase())}`
-            //     // console.log(`next: ${url}`)
-            //     // document.location =  url;
-            // })
+            $("#go_back_cta").click(function(){
+                    console.log("go back...")
+                    document.location =  "?goback=1";
+                })
         })
         </script>
     </BODY>
