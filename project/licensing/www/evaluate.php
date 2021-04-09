@@ -178,6 +178,55 @@
     }
 
 
+    function get_last_assignment($uid) {
+        $assignment_id = '';
+        $doc_id = '';
+        $n_total = 0;
+        $n_completed = 0;
+        $conn = db_connect();
+        // query number of assignments and completed assignments
+        $q1 = "
+        WITH compstats AS (
+                SELECT a.user_id
+                     , SUM(CASE WHEN r.submit_time IS NOT NULL THEN 1 ELSE 0 END) AS n_completed
+                     , COUNT(a.assignment_ID) AS n_total
+                FROM licensing_assignments a
+                LEFT JOIN licensing_responses r
+                on a.assignment_id=r.assignment_id
+                GROUP BY a.user_id
+            )
+            SELECT user_id, n_completed, n_total
+            FROM compstats
+            WHERE user_id='$uid'
+        ";
+        if ($res1 = $conn->query($q1)) {
+            $row1 = $res1->fetch_assoc();
+            $res1->close();
+            $n_completed = $row1['n_completed'];
+            $n_total = $row1['n_total'];
+        }
+        
+        $q = "
+        SELECT submit_time, display_time, doc_id, user_id, assignment_id, license_type, license_roles, valid_response
+        FROM licensing_responses 
+        WHERE user_id = '$uid'
+        ORDER BY submit_time DESC
+        LIMIT 1
+        ";
+        if ($res = $conn->query($q)) {
+            $row = $res->fetch_assoc();
+            $res->close();
+            $assignment_id = $row['assignment_id'];
+            $doc_id = $row['doc_id'];
+        } else {
+            $conn->close();
+            return get_next_assignment($uid);
+        }
+        $conn->close();
+        return array($assignment_id, $doc_id, $n_completed, $n_total);
+    }
+    
+
     function get_sample_doc($doc_id) {
         // $assignment_id = "anonymous_nothing";
         // $doc_id = "PRN0000020040420e04j00001";
@@ -242,7 +291,12 @@
         $n_total = 0;
         $n_completed = 0;
         list($content, $license_sents, $key_sents, $companies, $display_time) = get_doc($doc_id);
-    } else {
+        
+    } elseif (isset($_REQUEST, $_REQUEST['goback'])) {
+        $n_back = $_REQUEST['goback'];
+        list($assignment_id, $doc_id, $n_completed, $n_total) = get_last_assignment($uid);
+        list($content, $license_sents, $key_sents, $companies, $display_time) = get_doc($doc_id);
+    }else {
         list($assignment_id, $doc_id, $n_completed, $n_total) = get_next_assignment($uid);
         if ($n_completed>=$n_total) {
             header('Location: completed.php');
@@ -269,7 +323,10 @@
     <BODY>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">       
+                <div class="col-md-2">
+                    <a href="?goback=1"><button class="btn btn-sm btn-warning">Go back</button></a>
+                </div>
+                <div class="col-md-10">       
                     <p style="text-align: right;"><i>
                         <b>User:</b> <?= $uid ?>&nbsp;&nbsp;&nbsp;&nbsp;
                         <b>Progress:</b> <?= $n_completed ?>/<?= $n_total ?>
