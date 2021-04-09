@@ -324,7 +324,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-1">
-                    <a href="?goback=1"><button class="btn btn-small btn-danger">Go back</button></a>
+                    <a href="?goback=1"><button class="btn btn-danger">Go back</button></a>
                 </div>
                 <div class="col-md-11">       
                     <p style="text-align: right;"><i>
