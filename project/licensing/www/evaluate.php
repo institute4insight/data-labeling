@@ -325,9 +325,13 @@
             <div class="row">
                 <div class="col-md-2">
                     <a href="?goback=1">
-                        <button aria-disabled="<?= $n_completed>0 ? 'false' : 'true' ?>" class="btn btn-sm btn-warning">
+                        <button
+                            aria-disabled="<?= $n_completed>0 ? 'false' : 'true' ?>"
+                            class="btn btn-sm btn-warning <?= n_completed>0 ? '' : 'disabled' ?>"
+                        >
                             Go back
-                        </button></a>
+                        </button>
+                    </a>
                 </div>
                 <div class="col-md-10">       
                     <p style="text-align: right;"><i>
