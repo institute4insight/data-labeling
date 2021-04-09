@@ -323,10 +323,10 @@
     <BODY>
         <div class="container">
             <div class="row">
-                <div class="col-md-1">
-                    <a href="?goback=1"><button class="btn btn-danger">Go back</button></a>
+                <div class="col-md-2">
+                    <a href="?goback=1"><button class="btn btn-sm btn-warning">Go back</button></a>
                 </div>
-                <div class="col-md-11">       
+                <div class="col-md-10">       
                     <p style="text-align: right;"><i>
                         <b>User:</b> <?= $uid ?>&nbsp;&nbsp;&nbsp;&nbsp;
                         <b>Progress:</b> <?= $n_completed ?>/<?= $n_total ?>
